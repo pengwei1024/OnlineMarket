@@ -1,0 +1,254 @@
+package com.cxft.onlinemarket.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import com.cxft.onlinemarket.base.BaseDao;
+import com.cxft.onlinemarket.model.User;
+import com.cxft.onlinemarket.utils.JDBCUtils;
+
+public class UserDao extends BaseDao<User> {
+
+	// 根据邮箱密码查找用户，登录验证
+	public User loginCheck(String UseEmail, String userPassword) {
+		User user = null;
+		Connection con = JDBCUtils.getConnection();
+		String sql = "select * from tb_user where UserEmail='" + UseEmail
+				+ "'  and userPassword='" + userPassword + "'";
+		Statement stm = null;
+		ResultSet rst = null;
+		try {
+			stm = con.createStatement();
+			rst = stm.executeQuery(sql);
+			if (rst.next()) {
+				user = new User();
+				user.setUserName(rst.getString("username"));
+				user.setUserEmail(rst.getString("userEmail"));
+				user.setUserPassword(rst.getString("userPassword"));
+				user.setUserTel(rst.getInt("userTel"));
+				user.setUserAddress(rst.getString("UserAddress"));
+				user.setSex(rst.getString("sex"));
+				user.setCardType(rst.getString("cardType"));
+				user.setCardNumber(rst.getString("cardNumber"));
+				user.setCity(rst.getString("city"));
+				user.setPostCode(rst.getInt("postCode"));
+				user.setGrade(rst.getString("grade"));
+				user.setToken(rst.getString("token"));
+				user.setRegisterTime(rst.getString("registerTime"));
+				return user;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtils.close(rst, null, stm, con);
+		}
+		return user;
+	}
+
+	/**
+	 * 根据email和token值判断用户账号是否正确
+	 * 
+	 * @param uid
+	 * @param token
+	 * @return
+	 */
+	public boolean check(String uid, String token) {
+		Connection con = JDBCUtils.getConnection();
+		String sql = "select count(*) as count from tb_user where UserEmail='"
+				+ uid + "'  and token='" + token + "' limit 1";
+		Statement stm = null;
+		ResultSet rst = null;
+		try {
+			stm = con.createStatement();
+			rst = stm.executeQuery(sql);
+			if (rst.next()) {
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	// 通过email查找用户, 注册时避免用户邮箱已注册冲突
+	public boolean findUserByUserEmail(String userEmail) {
+		Connection con = JDBCUtils.getConnection();
+		Statement stm = null;
+		ResultSet rst = null;
+		String sql = "select * from tb_user where userEmail='" + userEmail
+				+ "'";
+		try {
+			stm = con.createStatement();
+			rst = stm.executeQuery(sql);
+			if (rst.next()) {
+				return true;
+			} else {
+				return false;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtils.close(rst, null, stm, con);
+		}
+		return false;
+	}
+
+	// 新用户注册
+	public void registerUser(User user) {
+		Connection con = JDBCUtils.getConnection();
+		String sql = "insert into tb_user(userName,userPassword,userEmail,token) values(?,?,?,?) ";
+		PreparedStatement ps = null;
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setString(1, user.getUserName());
+			ps.setString(2, user.getUserPassword());
+			ps.setString(3, user.getUserEmail());
+			ps.setString(4, user.getToken());
+			/*
+			 * ps.setString(4, user.getCardNumber()); ps.setString(5,
+			 * user.getCity()); ps.setInt(6, user.getPostCode());
+			 * ps.setString(7, user.getSex()); ps.setString(8,
+			 * user.getUserEmail()); ps.setString(9, user.getUserAddress());
+			 * ps.setInt(10, user.getUserTel()); ps.setString(11,
+			 * user.getGrade()); ps.setString(12, user.getRegisterTime());
+			 */
+			// 执行注册
+			ps.executeUpdate();
+			// 在页面输出显示
+			System.out.println("注册成功");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtils.close(null, ps, null, con);
+		}
+
+	}
+
+	// 用户修改个人信息
+	public void updateUserInfo(String userEmail, String userName,
+			String userPassword, String cardType, String cardNumber,
+			String city, int postCode, char sex, String userAddress, int userTel) {
+		Connection con = JDBCUtils.getConnection();
+		Statement stm = null;
+		String sql = "update tb_user set userName='" + userName
+				+ "',userPassword='" + userPassword + "',cardType='" + cardType
+				+ ",cardNumber='" + cardNumber + ",city='" + city
+				+ "',postCode='" + postCode + "',sex='" + sex
+				+ "',userAddress='" + userAddress + "',userTel='" + userTel
+				+ "' where userEmail='" + userEmail + "'";
+		try {
+			stm = con.createStatement();
+			stm.executeUpdate(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtils.close(null, null, stm, con);
+		}
+	}
+
+	/**
+	 * 激活用户
+	 * 
+	 * @param uid
+	 */
+	public void setActive(String uid) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("activeMail", 1);
+		super.update("tb_user", map, "userEmail=?", new Object[] { uid });
+	}
+
+	public boolean checkActive(String uid) {
+		ResultSet rst = super.select("tb_user", new String[] { "activeMail" },
+				"userEmail=? and activeMail=?", new Object[] { uid ,"1"});
+		try {
+			rst.last();
+			if (rst.getRow() == 1) {
+				return true;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	/*
+	 * 查找用户
+	 */
+	public List<User> findUser(String sql) {
+		List<User> list = new ArrayList<User>();
+		User user = null;
+		Connection con = JDBCUtils.getConnection();
+		Statement stm = null;
+		ResultSet rst = null;
+		try {
+			stm = con.createStatement();
+			rst = stm.executeQuery(sql);
+			while (rst.next()) {
+				user = new User();
+				user.setUserName(rst.getString("userName"));
+				user.setSex(rst.getString("sex"));
+				user.setUserEmail(rst.getString("userEmail"));
+				user.setUserPassword(rst.getString("userPassword"));
+				user.setCardType(rst.getString("cardType"));
+				user.setCardNumber(rst.getString("cardNumber"));
+				user.setCity(rst.getString("city"));
+				user.setUserAddress(rst.getString("userAddress"));
+				user.setPostCode(rst.getInt("postCode"));
+				user.setUserTel(rst.getInt("userTel"));
+				user.setGrade(rst.getString("grade"));
+				user.setRegisterTime(rst.getString("registerTime"));
+				user.setToken(rst.getString("token"));
+				user.setActiveMail(rst.getString("activeMail"));
+				list.add(user);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtils.close(rst, null, stm, con);
+		}
+		return list;
+	}
+
+	/*
+	 * 根据邮箱查询某个用户
+	 */
+	public List<User> findUserByEmail(String email) {
+		String sql = "SELECT * FROM tb_user WHERE userEmail ='" + email + "'";
+		return findUser(sql);
+	}
+
+	/*
+	 * 根据用户名查询多个用户
+	 */
+
+	public List<User> findUserByUserName(String name) {
+		String sql = "select * from tb_user where userName='" + name + "'";
+		return findUser(sql);
+	}
+
+	/*
+	 * 根据电话号码查询多个用户
+	 */
+	public List<User> findUserByUserTel(String tel) {
+		String sql = "select * from tb_user where userTel='" + tel + "'";
+		return findUser(sql);
+	}
+
+	/*
+	 * 根据用户等级查询多个用户
+	 */
+	public List<User> findUserByGrade(String grade) {
+		String sql = "select * from tb_user where grade='" + grade + "'";
+		return findUser(sql);
+	}
+
+}

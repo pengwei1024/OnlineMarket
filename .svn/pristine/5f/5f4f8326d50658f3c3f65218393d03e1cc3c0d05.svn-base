@@ -1,0 +1,60 @@
+<%@ page language="java" import="java.util.*" pageEncoding="Utf-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib prefix="fun" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+%>
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- <link rel="stylesheet" type="text/css" href="css/main.css" /> 
+<link rel="stylesheet" type="text/css" href="css/user.css" />-->
+<head>
+</head>
+<body style="text-align: center">
+	<h2>>个人中心</h2>
+	<form
+		action="${pageContext.request.contextPath}/ChangeUserInfoServlet?value=1"
+		method="post">
+		用户名：<input type="text" name="userName" placeholder="${user.userName}"
+			value="${user.userName}"><br> 邮箱： ${user.userEmail}<br>
+		身份证类型： <input type="radio" name="cardType" checked="checked"
+			vaule="身份证"> 身份证 <input type="radio" name="cardType"
+			vaule="学生证"> 学生证 <input type="radio" name="cardType"
+			vaule="军人证">军人证<br> 证件号：<input type="text"
+			name="cardNumber"><br> 性别：<input type="text" name="sex"
+			value="${user.sex}"> <br> 所在城市：<input type="text"
+			name="city" value="${user.city}"> <br> 居住地：<input
+			type="text" name="userAddress" value="${user.userAddress}"> <br>
+		联系电话：<input type="text" name="userTel" value="${user.userTel}">
+		<br> 注册时间：${user.registerTime} <br> <input type="submit"
+			value="更新" />
+	</form>
+	<hr>
+	<form
+		action="${pageContext.request.contextPath}/ChangeUserInfoServlet?value=2"
+		method="post">
+		原密码：<input type="password" name="old_userPassword"><br>
+		新密码：<input type="password" name="new_userPassword"><br>
+		确认密码：<input type="password" name="new_userPassword_check"><br>
+		<input type="submit" value="提交" />
+	</form>
+</body>
+<input type="hidden" id="info" value="${requestScope.Info}" />
+<script type="text/javascript">
+	var infos = document.getElementById("info").value;
+	if (infos == "updatesucess") {
+		alert("个人资料更新成功！");
+	}
+	if (infos == "failInfo") {
+		alert("数据更新失败！");
+	}
+	if (infos == "worng") {
+		alert("原始密码错误！请输入正确密码");
+	}
+</script>
+</html>

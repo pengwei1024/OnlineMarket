@@ -1,0 +1,170 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+%>
+<!--
+/**
+ * 　　　　　　　　┏┓　　　┏┓
+ * 　　　　　　　┏┛┻━━━┛┻┓  
+ * 　　　　　　　┃　　　　　　　┃ 　 
+ * 　　　　　　　┃　　　━　　　┃   
+ * 　　　　　　　┃　＞　　　＜　┃
+ * 　　　　　　　┃　　　　　　　┃
+ * 　　　　　　　┃...　⌒　...  ┃
+ * 　　　　　　　┃　　　　　　　┃ 
+ * 　　　　　　　┗━┓　　　┏━┛ 
+ * 　　　　　　　　　┃　　　┃　Code is far away from bug with the animal protecting　　　　
+ * 　　　　　　　　　┃　　　┃    神兽护体,代码无bug
+ * 　　　　　　　　　┃　　　┃　　　　　　　　　　　 
+ * 　　　　　　　　　┃　　　┃  　　　　　　 
+ * 　　　　　　　　　┃　　　┃ 
+ * 　　　　　　　　　┃　　　┃　　　　　　　　　　　 
+ * 　　　　　　　　　┃　　　┗━━━┓ 
+ * 　　　　　　　　　┃　　　　　　　┣┓ 
+ * 　　　　　　　　　┃　　　　　　　┏┛ 
+ * 　　　　　　　　　┗┓┓┏━┳┓┏┛ 
+ * 　　　　　　　　　　┃┫┫　┃┫┫ 
+ * 　　　　　　　　　　┗┻┛　┗┻┛
+ */
+-->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>传习在线书城</title>
+<link id="favicon" href="favicon.ico" rel="icon" type="image/x-icon" />
+<link href="css/basic.css" rel="stylesheet">
+<link href="css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+	<header id="header">
+		<%
+			String user = (String) session.getAttribute("username");
+		%>
+		<div class="topbar">
+			<%
+				if (user == null || user.equals("")) {
+			%>
+			<span class="left">欢迎光临传习在线书城，请登录<a href="./login.jsp">登录</a>
+				<a href="./register.jsp">免费注册</a>
+			</span>
+			<%
+				} else {
+			%>
+			<span class="left">欢迎光临传习在线书城:<%=user%><a
+				href="${pageContext.request.contextPath }/Logout">登出</a>
+			</span>
+			<%
+				}
+			%>
+			<ul class="right">
+				<li><a href="${pageContext.request.contextPath }/cart.jsp">购物车</a></li>
+				<li><a href="${pageContext.request.contextPath }/OrderListServlet">我的订单</a></li>
+				<li><a href="${pageContext.request.contextPath }/ShowUserInfoServlet">客戶服务</a></li>
+				<li><a href="">网站导航</a></li>
+			</ul>
+		</div>
+		<div class="logo">
+			<a href="<%=basePath%>"> <img class="header-logo"
+				src="images/logo.png" />
+			</a>
+			<div class="header-search">
+				<div class="header-search-box">
+					<input type="text"  id="searchbox" /> 
+					<input type="button" value="搜索"  id="searchbox_btn" />
+				</div>
+				<div class="header-search-hot">
+					<span>热门搜索</span> <a href="javascript:void(0)">9.9元封顶</a> <a
+						href="javascript:void(0)">9.9元封顶</a> <a href="javascript:void(0)">9.9元封顶</a>
+					<a href="javascript:void(0)">9.9元封顶</a> <a
+						href="javascript:void(0)">9.9元封顶</a>
+				</div>
+			</div>
+			<div class="header-toolbar">
+				<div class="header-toolbar-t">
+					<span>我的订单</span>
+					<div class="header-toolbar-submenu header-toolbar-order">
+						<ul>
+							<li><a href="#">待处理订单</a></li>
+							<li><a href="#">我的关注</a></li>
+							<li><a href="#">我的回复</a></li>
+							<li><a href="#">降价商品</a></li>
+							<li><a href="#">返修退换货</a></li>
+							<li><a href="#">优惠券</a></li>
+							<li><a href="#">我的理财</a></li>
+							<li><a href="#">我的白条</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="header-toolbar-t">
+					<c:set var="contu" value="0" />
+					<div class="header-toolbar-submenu header-toolbar-shop">
+						<c:if test="${empty sessionScope.cartmap}">
+							<div class="header-toolbar-shop-empty">
+								<b></b> <span>购物车中还没有商品，赶紧选购吧！</span>
+							</div>
+						</c:if>
+						<c:if test="${not empty sessionScope.cartmap}">
+							<table style="width:100%">
+								<c:set var="money" value="0" />
+								<c:forEach items="${sessionScope.cartmap}" var="entry">
+									<tr>
+										<td><img src="${entry.key.bookPicture}" width="60px"
+											height="60px" /></td>
+										<td>${entry.key.bookName }</td>
+										<td>${entry.key.bookPrice }元</td>
+										<td>x${entry.value }件</td>
+										<td>${entry.key.bookPrice * entry.value }元<c:set
+												var="money"
+												value="${money + entry.key.bookPrice * entry.value }" /> <c:set
+												var="contu" value="${contu+entry.value}" />
+										</td>
+										<td><a
+											href="${pageContext.request.contextPath }/DelCartServlet?id=${entry.key.bookId }">删除</a></td>
+									</tr>
+								</c:forEach>
+							</table>
+							<div class="header-toolbar-shop-sumary">合计:<span>￥${money}元</span>
+							</div>
+							<div style="text-align:center;">
+								<button onclick="location.href='${pageContext.request.contextPath }/DelAllCartServlet'">清空购物车</button>
+								<button onclick="location.href='${pageContext.request.contextPath }/cart.jsp'">去购物车结算</button>
+							</div>
+						</c:if>
+					</div>
+					<span >去购物车结算 <span class="header-toolbar-shop-count">${contu==0?"":contu}</span>
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="nav">
+			<ul>
+				<li><a href="#">书籍分类 <span></span>
+				</a>
+					<ol>
+						<li>小说</li>
+						<li>励志与成功</li>
+						<li>婚恋</li>
+						<li>两性</li>
+						<li>文学</li>
+						<li>经管</li>
+						<li>小说</li>
+						<li>励志与成功</li>
+						<li>婚恋</li>
+						<li>两性</li>
+						<li>文学</li>
+						<li>经管</li>
+					</ol></li>
+				<li><a href="<%=basePath%>">首页</a></li>
+				<li><a href="DisplayBookServlet?type=newbook">新书上架</a></li>
+				<li><a href="DisplayBookServlet?type=salebook">特价书籍</a></li>
+				<li><a href="DisplayBookServlet?type=sellingbook">畅销书籍</a></li>
+				<li><a href="javascript:void(0)">我的订单</a></li>
+				<li><a href="javascript:void(0)">用户中心</a></li>
+			</ul>
+		</div>
+	</header>

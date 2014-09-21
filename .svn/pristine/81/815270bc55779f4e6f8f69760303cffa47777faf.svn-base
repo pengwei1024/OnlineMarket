@@ -1,0 +1,65 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+<link rel="stylesheet" type="text/css" href="css/pbl.css"/>
+<link rel="stylesheet" type="text/css" href="css/book.css"/>
+<jsp:include page="header.jsp"></jsp:include>
+
+
+<div id="content">
+	<div class="book_nav left">
+		<img src="images/dog.png"/>
+		<% for(int i=0;i<2;i++){  %>
+		<dl>
+			<dt>商品惠</dt>
+			<dd>新书上架</dd>
+			<dd>新书上架</dd>
+			<dd>新书上架</dd>
+			<dd>新书上架</dd>
+			<dd>新书上架</dd>
+			<dd>新书上架</dd>
+			<dd>新书上架</dd>
+			<dd>新书上架</dd>
+		</dl>
+		<% } %>
+	</div>
+	<div class="containter left">
+  <div id="waterfall">
+      <% for(int i =0; i < 30; i++){  %>
+      	<dl>
+      <dt><a target="blank" href="#">扛得住，世界就是你的</a></dt>
+      <dd><img src="http://img33.ddimg.cn/72/6/23537223-1_l_6.jpg" alt="扛得住，世界就是你的" /></dd>
+      <dd>
+        <p>
+        	当当网独家发售，2014北京地铁最流行、最励志语录。马云说，有些事死扛下去总有机会的。
+        	豆瓣红人小川叔最新力作，反鸡汤，不做作，豆瓣红人这么远那么近、鼹鼠的土豆、午歌倾情推荐！ 
+        </p>
+      </dd>
+      <dd class="more">
+      	<span>¥5.8</span>
+      	<span>查看详情</span>
+      </dd>
+      </dl>
+      <% } %>
+  </div>
+</div>
+</div>
+<div class="clear"></div>
+<script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" src="js/pbl.js"></script>
+<script type="text/javascript">
+		$(window).scroll(function(){
+			if($(window).scrollTop() > 100){
+				$("#content .book_nav").css({'position':'fixed','top':'20px'});
+				$(".containter").css({'marginLeft':'200px'});
+				$("#content .book_nav>img").css('display','inline');
+			}else{
+				$("#content .book_nav").css({'position':'relative'});
+				$(".containter").css({'marginLeft':'0'});
+				$("#content .book_nav>img").css('display','none');
+			}
+		});
+</script>
+<jsp:include page="footer.jsp"></jsp:include>

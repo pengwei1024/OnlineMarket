@@ -1,0 +1,103 @@
+<%@  page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+<footer id="footer">
+	<div class="footer_pic_new"></div>
+	<table>
+		<tr class="title">
+			<td>购物指南</td>
+			<td>支付方式</td>
+			<td>订单服务</td>
+			<td>配送方式</td>
+			<td>换退货</td>
+			<td>商家服务</td>
+		</tr>
+		<tr>
+			<td>购物流程</td>
+			<td>货到付款</td>
+			<td>订单配送查询</td>
+			<td>配送范围及免邮标准</td>
+			<td>退换货政策</td>
+			<td>招商报名</td>
+		</tr>
+		<tr>
+			<td>发票制度</td>
+			<td>网上支付</td>
+			<td>订单状态说明</td>
+			<td>当日递/次日达</td>
+			<td>自助申请退换货</td>
+			<td>商家入驻</td>
+		</tr>
+		<tr>
+			<td>账户管理</td>
+			<td>礼品卡支付</td>
+			<td>自助取消订单</td>
+			<td>订单自提</td>
+			<td>退换货进度查询</td>
+			<td>运营服务</td>
+		</tr>
+		<tr>
+			<td>会员优惠</td>
+			<td>银行转帐</td>
+			<td>自助修改订单</td>
+			<td>验货与签收</td>
+			<td>退款方式和时间</td>
+			<td>加入尾品汇</td>
+		</tr>
+	</table>
+	<div class="footer_nav_box">
+		<div class="footer_nav">
+			<a href="javascript:void(0)">公司简介</a>
+			<a href="javascript:void(0)">Investor Relations</a>
+			<a href="javascript:void(0)">诚征英才</a>
+			<a href="javascript:void(0)">网站联盟</a>
+			<a href="javascript:void(0)">广告服务</a>
+			<a href="javascript:void(0)">当当招商</a>
+			<a href="javascript:void(0)">机构销售</a>
+			<a href="javascript:void(0)">手机当当</a>
+			<a href="javascript:void(0)">官方Blog</a>
+		</div>
+		<div class="footer_copyright">
+			Copyright (C) 当当网 2004-2014, All Rights Reserved<br/>
+			京ICP证041189号|出版物经营许可证 新出发京批字第直0673号|食品流通许可证：SP1101011010021855(1-1)
+		</div>
+		<div class="footer_copyright_sign">
+			<img src="images/validate.gif"/>
+			<img src="images/knetSealLogo.png"/>
+		</div>
+	</div>
+</footer>
+<div class="back-to-top"></div>
+<script type="text/javascript">
+    $(function () {
+        $(window).scroll(function () {
+            if ($(window).scrollTop() > 100) {
+                $(".back-to-top").fadeIn(1500);
+            }else {
+                $(".back-to-top").fadeOut(1500);
+            }
+        });
+        $(".back-to-top").click(function () {
+            //$('body,html').animate({scrollTop: 0}, 400);
+        	$('html,body').stop().animate({scrollTop: '0px'}, 800);
+            return false;
+        });
+        
+        //更新页面的title和keyword等值
+        $.ajax({
+        	   type: "POST",
+        	   url: "site?action=getSiteData",
+        	   dataType:"json",
+        	   data: "",
+        	   success: function(msg){
+        		   $("title").html(msg.title);
+        		   $("meta[name='Keywords']").attr("content",msg.keyword);
+        		   $("meta[name='description']").attr("content",msg.describe);
+        	   }
+        	});
+    });
+</script>
+</body>
+</html>

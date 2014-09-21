@@ -1,0 +1,35 @@
+
+*{
+	margin:0;
+	padding:0;
+}
+
+body{
+	background:url("../images/admin_login_bg.png");
+}
+
+.login_panel{
+	width:890px;
+	height:354px;
+	margin:8% auto;
+	background:url("../images/admin_login_content_bg.png") -50px -50px #fff no-repeat;
+	border:5px solid #E8E8E8;
+	border-radius:4px;
+	opacity:0.9;
+}
+
+#login-form{
+	width:40%;
+	float:right;
+	margin:0 5% 0 0;
+}
+#login-form>h2{
+	text-align:center;
+	font:20px "Microsoft Yahei";
+	font-weight:600;
+}
+
+#login-form button[type="submit"]{
+	font:14px "Microsoft Yahei";
+	margin-top:20px;
+}

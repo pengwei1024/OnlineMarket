@@ -1,0 +1,14 @@
+@CHARSET "UTF-8";
+.personHeader strong{line-height: 60px;color: #333;font-family:"微软雅黑"; font-size: 20px; padding-left:15px;}
+	.personContent{ margin:30px 60px;}
+	.personContent a{ color:#666; text-decoration:none;}
+	.personContent input{padding-left:5px; line-height:25px; border-left:1px solid #aaa;border-right:1px solid #ddd;border-top:1px solid #aaa;border-bottom:1px solid #bbb; }
+	#baseinfoForm .baseinfo{border:none;}
+	#pswForm {display:none;}
+	#pswForm .pswSubtmit,#baseinfoForm .pswSubtmit{background:#fbddaa; width:50px; color:#fa5000; font-size:14px;border-radius:4px;border:1px solid #fa5000; margin-left:10px;}
+	#pswForm .pswSubtmit:hover,#baseinfoForm .pswSubtmit:hover{color:#fff;background:#fa5000;}
+	.personInfoHeader{ width:100%;color:#cc0000; border:1px solid #e6e6e6;border-bottom:5px solid #cc0000;margin-bottom:20px;}
+	.personInfoHeader div,#personPswHeader div{padding-left: 16px;font-size:14px; font-weight:bold;font-family:"微软雅黑"; line-height:30px;}
+	#personPswHeader{ width:100%;color:#fa5000; border:1px solid #fbddaa;border-bottom:5px solid #fa5000;margin-bottom:20px;cursor: pointer;}
+	#updateSubtmit,#cancelbutton{ display:none;}
+	

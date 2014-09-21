@@ -1,0 +1,106 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+	String columnPath = basePath + "admin/includes/";
+%>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<base href="<%=columnPath%>">
+
+<title>My JSP 'center.jsp' starting page</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../css/basic.css">
+<link rel="stylesheet" type="text/css" href="../css/scrollbar.css">
+<link rel="stylesheet" type="text/css" href="../css/center.css">
+</head>
+
+<body>
+	<table width="100%" height="100%" border="0" cellpadding="0"
+		cellspacing="0" style="table-layout:fixed;">
+		<tr>
+			<td width="200px" valign="top">
+				<div id="menu">
+					<div>
+						<a href="javascript:jumpTo('goodsManage/content.jsp')"> <b>&nbsp;</b><span></span>商品管理
+						</a>
+						<ul>
+							<li><a
+								href="javascript:jumpTo('../../../QueryBookInfoServlet')">查看商品信息</a></li>
+							<li><a
+								href="javascript:jumpTo('goodsManage/add_book_info.jsp')">添加商品信息</a></li>
+						</ul>
+					</div>
+					<div>
+						<a href="javascript:void(0)"> <b>&nbsp;</b><span></span>订单管理
+						</a>
+						<ul>
+							<li><a
+								href="javascript:jumpTo('../../../QueryOrderListServlet')">订单列表</a></li>
+							<li><a href="javascript:void(0)">添加订单</a></li>
+							<li><a href="javascript:void(0)">添加订单</a></li>
+							<li><a href="javascript:void(0)">添加订单</a></li>
+						</ul>
+					</div>
+					<div>
+						<a href="javascript:void(0)"> <b>&nbsp;</b><span></span>会员管理
+						</a>
+						<ul>
+							<li><a
+								href="javascript:jumpTo('userManage/searchUserByEmail.jsp')">会员搜索</a></li>
+							<li><a href="javascript:void(0)">添加订单</a></li>
+							<li><a href="javascript:void(0)">添加订单</a></li>
+							<li><a href="javascript:void(0)">添加订单</a></li>
+							<li><a href="javascript:void(0)">添加订单</a></li>
+						</ul>
+					</div>
+					<div>
+						<a href="javascript:void(0)"> <b>&nbsp;</b><span></span>公告管理
+						</a>
+						<ul>
+							<li><a href="javascript:jumpTo('noticeManage/index.jsp')">发布公告</a></li>
+							<li><a href="javascript:jumpTo('noticeManage/show.jsp')">管理公告</a></li>
+						</ul>
+					</div>
+					<div>
+						<a href="javascript:void(0)"> <b>&nbsp;</b><span></span>财务分析
+						</a>
+						<ul>
+							<li><a href="javascript:void(0)">站点信息</a></li>
+							<li><a href="javascript:void(0)">管理员列表</a></li>
+							<li><a href="javascript:void(0)">管理员注册</a></li>
+						</ul>
+					</div>
+					<div>
+						<a href="javascript:void(0)"> <b>&nbsp;</b><span></span>站点管理
+						</a>
+						<ul>
+							<li><a href="javascript:jumpTo('siteManage/site.jsp')">站点信息</a></li>
+							<li><a href="javascript:jumpTo('siteManage/index.jsp')">管理员列表</a></li>
+							<li><a href="javascript:jumpTo('siteManage/register.jsp')">管理员注册</a></li>
+						</ul>
+					</div>
+				</div>
+			</td>
+			<td valign="top"><iframe id="content" src="column/content.jsp"
+					width="100%" height="100%" border="0" frameborder="0"></iframe></td>
+		</tr>
+	</table>
+	<script type="text/javascript" src="../js/jquery-1.8.2.min.js"></script>
+	<script type="text/javascript">
+		$("#menu>div>a").click(function() {
+			$("#menu>div>a").removeClass("menu_selected");
+			$(this).addClass("menu_selected");
+			$(this).next().toggle(500);
+
+		});
+		function jumpTo(columnPath) {
+			var frame = document.getElementById("content");
+			frame.src = "column/" + columnPath;
+		}
+	</script>
+</body>
+</html>

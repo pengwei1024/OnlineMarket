@@ -1,0 +1,50 @@
+.makeup1
+{
+	width:900px;height:60px;margin:10px auto;
+	cursor:pointer;
+}
+.makeup2
+{
+	width:900px;height:60px;margin:10px auto;
+}
+.content{
+	width:800px;height:350px;margin:60px auto;border:5px solid #E8E8E8;background:#FFFFFF
+}
+.container_left
+{
+	float:left;
+	width:400px;
+	height:340px;
+}
+.container_right
+{
+	width:380px;
+	float:left;
+}
+.top
+{
+	width:250px;height:50px;text-align:center;
+}
+.Img
+{
+	width:444px;
+	height:435px;
+	position:relative;
+	top:-47px;
+	left:-45px;
+	}
+form{
+	width:300px;
+	margin:20px auto;
+}
+form>h2{
+	text-align:center;
+	font:24px "Microsoft Yahei";
+}
+form input[type='submit']{
+	margin-top:30px;
+}
+.content a[href='register.jsp']{
+	display:block;
+	text-align:center;
+}

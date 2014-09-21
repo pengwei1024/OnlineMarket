@@ -1,0 +1,173 @@
+package com.cxft.onlinemarket.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
+import javax.servlet.http.HttpServletRequest;
+
+import com.cxft.onlinemarket.model.Order;
+import com.cxft.onlinemarket.model.OrderDetail;
+import com.cxft.onlinemarket.utils.JDBCUtils;
+
+public class OrderDao {
+
+	/**
+	 * 生成订单。
+	 * 
+	 * @param request
+	 * @param Email
+	 */
+	public void addOrder(Order order) {
+		Connection conn = JDBCUtils.getConnection();
+		String sql = "insert into tb_order(orderId,user_ID,receiverName,receiverAddress,receiverTel,payType, paystate,orderRemark,money) values(?,?,?,?,?,?,?,?,?)";
+		PreparedStatement ps = null;
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, order.getOrderId());
+			ps.setString(2, order.getUser_ID());
+			ps.setString(3, order.getReceiverName());
+			ps.setString(4, order.getReceiverAddress());
+			ps.setInt(5, order.getReceiverTel());
+			ps.setString(6, order.getPayType());
+			ps.setString(7, order.getPaystate());
+			ps.setString(8, order.getOrderRemark());
+			ps.setDouble(9, order.getMoney());
+			ps.executeUpdate();
+			ps.close();
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtils.close(null, ps, null, conn);
+		}
+	}
+
+	public void AddOrderDetail(OrderDetail item) {
+		Connection conn = JDBCUtils.getConnection();
+		String sql = "insert into tb_orderitem(order_id,Book_id,buynum) values(?,?,?)";
+		PreparedStatement ps = null;
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1,item.getOrder_id());
+			ps.setInt(2,item.getBook_id());
+			ps.setInt(3, item.getNumber());
+			ps.executeUpdate();
+			ps.close();
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtils.close(null, ps, null, conn);
+		}
+	}
+
+	/**
+	 * 查询订单
+	 * 
+	 * @return
+	 */
+	public List<Order> findOrder(String sql) {
+		Statement stm = null;
+		ResultSet rst = null;
+		// 连接数据库
+		Connection con = JDBCUtils.getConnection();
+		List<Order> list = new ArrayList<Order>();
+		try {
+			stm = con.createStatement();
+			rst = stm.executeQuery(sql);
+			while (rst.next()) {
+				Order order = new Order();
+				order.setOrderId(rst.getString("orderId"));
+				order.setUser_ID(rst.getString("user_ID"));
+				order.setReceiverName(rst.getString("receiverName"));
+				order.setReceiverAddress(rst.getString("receiverAddress"));
+				order.setReceiverTel(rst.getInt("receiverTel"));
+				order.setPayType(rst.getString("payType"));
+				order.setOrderRemark(rst.getString("orderRemark"));
+				order.setMoney(rst.getDouble("money"));
+				order.setPaystate(rst.getString("paystate"));
+				list.add(order);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtils.close(rst, null, stm, con);
+		}
+		return list;
+	}
+
+	/**
+	 * 
+	 * 查找订单
+	 */
+	public List<Order> findAllOrder() {
+		String sql = "select * from tb_order";
+		return findOrder(sql);
+	}
+
+	/*
+	 * 用户ID根据获取订单
+	 */
+	public List<Order> findOrderByEmail(String email) {
+		String sql = "select * from tb_order where user_ID='" + email + "'";
+		return findOrder(sql);
+	}
+
+	/**
+	 * 删除订单（可批量删除）
+	 * 
+	 * @param orderIds
+	 */
+	public void delete(String[] orderIds) {
+		// 连接数据库
+		Connection con = JDBCUtils.getConnection();
+		PreparedStatement ps = null;
+		String sql = "delete from tb_order where orderId=?";
+		try {
+			ps = con.prepareStatement(sql);
+			for (String orderId : orderIds) {
+				ps.setString(1, orderId);
+				ps.addBatch();
+			}
+			ps.executeBatch();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtils.close(null, ps, null, con);
+		}
+	}
+
+	/**
+	 * 修改订单信息
+	 * 
+	 * @param receiverName
+	 * @param receiverAddress
+	 * @param postCode
+	 * @param userTel
+	 */
+	public void update(String receiverName, String receiverAddress,
+			int postCode, int receiverTel) {
+		// 连接数据库
+		Connection con = JDBCUtils.getConnection();
+		Statement stm = null;
+		// 修改：收件人姓名，收件人地址，邮编，收件人联系方式
+		String sql = "update tb_order set receiverName='" + receiverName
+				+ "'receiverAddress='" + receiverAddress + "',postCode='"
+				+ postCode + "'receiverTel'" + receiverTel + "'";
+		try {
+			stm = con.prepareStatement(sql);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		} finally {
+			JDBCUtils.close(null, null, stm, con);
+		}
+	}
+}

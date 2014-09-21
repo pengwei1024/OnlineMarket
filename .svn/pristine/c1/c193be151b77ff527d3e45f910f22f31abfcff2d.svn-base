@@ -1,0 +1,15 @@
+@CHARSET "UTF-8";
+#content{
+	margin-top:10px;
+}
+.order_menu{
+	width:12%;
+	background:#Fafbfc;
+	margin-top:10px;
+}
+.order_panel{
+	width:86%;
+	margin-left:1%;
+	background:#Fafbfc;
+	margin-top:10px;
+}

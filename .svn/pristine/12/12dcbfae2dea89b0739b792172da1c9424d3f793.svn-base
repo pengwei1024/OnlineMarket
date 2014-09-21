@@ -1,0 +1,42 @@
+package com.cxft.onlinemarket.controller;
+
+
+import java.io.IOException;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.cxft.onlinemarket.dao.BookDao;
+import com.cxft.onlinemarket.model.Book;
+
+/*
+ * –¬ È…œº‹
+ */
+public class ShowNewBookServlet extends HttpServlet {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		BookDao dao = new BookDao();
+		List<Book> list_newBook = new ArrayList<Book>();
+		list_newBook = dao.newBook();
+		request.setAttribute("list_newBook", list_newBook);
+		request.getRequestDispatcher("/includes/index_container_center.jsp").forward(request, response);
+	}
+
+
+	public void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doGet(request, response);
+	}
+
+}

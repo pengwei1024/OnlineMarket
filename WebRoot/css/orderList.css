@@ -1,0 +1,29 @@
+@CHARSET "UTF-8";
+#content{
+	margin-top:10px;
+}
+#content>.personHeader>strong{
+	line-height: 60px;
+	color: #333;
+	font-family: "微软雅黑";
+	font-size: 20px;
+	padding-left: 15px;
+}
+#content>h3{
+	background:#F5F5F5;
+	padding:7px 10px;
+	font-size:14px;
+	color: #005ea7;
+}
+.order_info{
+	margin-bottom:10px;
+}
+.order_info tr td{
+	padding:8px 0;
+	font-size:15px;
+	valign:middle;
+}
+.order_info tr button{
+	float:right;
+	margin-right:20px;
+}

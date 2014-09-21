@@ -1,0 +1,70 @@
+#menu{
+	width:200px;
+			height:100%;
+			overflow-x:hidden;
+			overflow-y:scroll;
+			background:#F6FAFD;
+			padding-bottom:100px;
+		}
+		#menu>div>a{
+			height:45px;
+			cursor:pointer;
+			font:14px "Microsoft Yahei";
+			line-height:45px;
+			display:block;
+			text-decoration:none;
+			color: #384463;
+		}
+		#menu>div>a:hover{
+			background:#E3F0FC;
+		}
+		#menu>div>a>b{
+			display:none;
+			width:4px;
+			background:#599BE1;	
+		}
+		#menu>div>a>span{
+			display:inline-block;
+			width:20px;
+			height:15px;
+			background:url("../images/admin_menu_icon.png");
+			margin:0 5px 0 15px;
+			position:relative;
+			top:3px;
+			
+		}
+		#menu>div>ul{
+		display:none;
+		background:#F3F6FC;
+		list-style-type:square !important;
+		}
+		#menu>div>ul>li{
+			height:35px;	
+			display:block;
+			cursor:pointer;
+		}
+		#menu>div>ul>li>a{
+			display:inline-block;
+			height:35px;
+			text-decoration:none;
+			font:12px "Microsoft Yahei";
+			margin-left:30px;
+			line-height:35px;
+			color:#1D74E0;
+			background:url("../images/bu2.png") 0 14px no-repeat;
+			padding-left:15px;
+		}
+		#menu>div>ul>li>a:hover{
+			color:#BA3416;
+			background-image:url("../images/bu2_.png");
+		}
+		
+		/*菜单被选中*/
+		.menu_selected{
+			background:#E3F0FC;
+			border:1px solid #D9EBFC;
+			border-left:0;
+		}
+		.menu_selected b{
+			display:inline-block !important;
+		}

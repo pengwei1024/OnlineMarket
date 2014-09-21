@@ -1,0 +1,4 @@
+driver=com.mysql.jdbc.Driver
+url=jdbc\:mysql\://192.168.1.108\:3306/onlinemarket?autoReconnect\=true&useUnicode\=true&characterEncoding\=UTF-8
+username=OnlineMarket
+password=3018

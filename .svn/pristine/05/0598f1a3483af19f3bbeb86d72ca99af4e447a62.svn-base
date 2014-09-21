@@ -1,0 +1,121 @@
+package com.cxft.onlinemarket.model;
+
+public class Order {
+	private int orderId;
+	private float rebate;
+	private String userName;
+	private String receiverName;
+	private String receiverAddress;
+	private int receiverTel;
+	private int postCode;
+	private int userTel;
+	private String payType;
+	private String orderDate;
+	private float money;
+	private String orderRemark;
+	private String statement;
+	
+	public String getReceiverName() {
+		return receiverName;
+	}
+
+	public void setReceiverName(String receiverName) {
+		this.receiverName = receiverName;
+	}
+
+	public String getReceiverAddress() {
+		return receiverAddress;
+	}
+
+	public void setReceiverAddress(String receiverAddress) {
+		this.receiverAddress = receiverAddress;
+	}
+
+	public int getReceiverTel() {
+		return receiverTel;
+	}
+
+	public void setReceiverTel(int receiverTel) {
+		this.receiverTel = receiverTel;
+	}
+
+	public int getOrderId() {
+		return orderId;
+	}
+
+	public void setOrderId(int orderId) {
+		this.orderId = orderId;
+	}
+
+	public float getRebate() {
+		return rebate;
+	}
+
+	public void setRebate(float rebate) {
+		this.rebate = rebate;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public int getPostCode() {
+		return postCode;
+	}
+
+	public void setPostCode(int postCode) {
+		this.postCode = postCode;
+	}
+
+	public int getUserTel() {
+		return userTel;
+	}
+
+	public void setUserTel(int userTel) {
+		this.userTel = userTel;
+	}
+
+	public String getPayType() {
+		return payType;
+	}
+
+	public void setPayType(String payType) {
+		this.payType = payType;
+	}
+
+	public String getOrderDate() {
+		return orderDate;
+	}
+
+	public void setOrderDate(String orderDate) {
+		this.orderDate = orderDate;
+	}
+
+	public float getMoney() {
+		return money;
+	}
+
+	public void setMoney(float money) {
+		this.money = money;
+	}
+
+	public String getOrderRemark() {
+		return orderRemark;
+	}
+
+	public void setOrderRemark(String orderRemark) {
+		this.orderRemark = orderRemark;
+	}
+
+	public String getStatement() {
+		return statement;
+	}
+
+	public void setStatement(String statement) {
+		this.statement = statement;
+	}
+}

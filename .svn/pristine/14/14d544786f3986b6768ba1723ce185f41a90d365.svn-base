@@ -1,0 +1,207 @@
+package com.cxft.onlinemarket.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
+import com.cxft.onlinemarket.model.Book;
+import com.cxft.onlinemarket.utils.JDBCUtils;
+
+public class BookDao {
+
+	/*
+	 * 添加图书
+	 */
+	public void addBook(HttpServletRequest request) {
+		Connection con = JDBCUtils.getConnection();
+		String sql = "insert into tb_book(bookName,bookAuthor,bookPublisher,bookType,bookPrice,bookNowPrice,bookPicture,sale,newBook,hit,bookIntroduction,pnum) values(?,?,?,?,?,?,?,?,?,?,?,?)";
+		PreparedStatement ps = null;
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setString(1, request.getParameter("bookName"));
+			ps.setString(2, request.getParameter("bookAuthor"));
+			ps.setString(3, request.getParameter("bookPublisher"));
+			ps.setString(4, request.getParameter("bookType"));
+			ps.setFloat(5, Float.parseFloat(request.getParameter("bookPrice")));
+			ps.setFloat(6,Float.parseFloat(request.getParameter("bookNowPrice")));
+			ps.setString(7, request.getParameter("bookPicture"));
+			ps.setInt(8, Integer.parseInt(request.getParameter("sale")));
+			ps.setInt(9, Integer.parseInt(request.getParameter("newBook")));
+			ps.setInt(10, Integer.parseInt(request.getParameter("hit")));
+			ps.setString(11, request.getParameter("bookIntroduction"));
+			ps.setInt(12, Integer.parseInt(request.getParameter("pnum")));// 库存
+			// 执行增加操作
+			ps.executeUpdate();
+			ps.close();
+			con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtils.close(null, ps, null, con);
+		}
+	}
+
+	/*
+	 * 找书
+	 */
+	public List<Book> findBook(String sql) {
+		Connection con = JDBCUtils.getConnection();
+		List<Book> list = new ArrayList<Book>();
+		Statement stm = null;
+		ResultSet rst = null;
+		try {
+			stm = con.createStatement();
+			rst = stm.executeQuery(sql);
+			while (rst.next()) {
+				Book book = new Book();
+				book.setBookId(rst.getInt("bookId"));
+				book.setBookName(rst.getString("bookName"));
+				book.setBookAuthor(rst.getString("bookAuthor"));
+				book.setBookPrice(rst.getDouble("bookPrice"));
+				book.setBookNowPrice(rst.getDouble("bookNowPrice"));
+				book.setBookPublisher(rst.getString("bookPublisher"));
+				book.setBookType(rst.getString("bookType"));
+				book.setNewbook(rst.getInt("newBook"));
+				book.setSale(rst.getInt("sale"));
+				book.setBookIntroduction(rst.getString("bookIntroduction"));
+				book.setBookPicture(rst.getString("bookPicture"));
+				book.setHit(rst.getInt("hit"));
+				book.setPnum(rst.getInt("pnum"));
+				list.add(book);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtils.close(rst, null, stm, con);
+		}
+		return list;
+	}
+
+	/*
+	 * 查找全部
+	 */
+	public List<Book> findAllBook() {
+		String sql = "select * from tb_book";
+		return findBook(sql);
+	}
+
+	/*
+	 *  根据书编号获取
+	 */
+	public List<Book> findBookByID(int bookId) {
+		String sql = "select * from tb_book where bookId='" + bookId + "'";
+		return findBook(sql);
+	}
+	
+	/*
+	 * 根据书名找书
+	 */
+	public List<Book> findBookByBookName(String bookName) {
+		String sql = "select * from tb_book where bookName='" + bookName + "'";
+		return findBook(sql);
+	}
+
+	/*
+	 * 根据书的类别找书
+	 */
+	public List<Book> findBookByBookType(String bookType) {
+		String sql = "select * from tb_book where bookType='" + bookType + "'";
+		return findBook(sql);
+	}
+
+	/*
+	 * 根据作者找书
+	 */
+	public List<Book> findBookByBookAuthor(String bookAuthor) {
+		String sql = "select * from tb_book where bookAuthor='" + bookAuthor
+				+ "'";
+		return findBook(sql);
+	}
+
+	/*
+	 * 根据出版社找书
+	 */
+	public List<Book> findBookByBookPublisher(String bookPublisher) {
+		String sql = "select * from tb_book where bookPublisher='"
+				+ bookPublisher + "'";
+		return findBook(sql);
+	}
+
+	/*
+	 * 畅销书
+	 */
+	public List<Book> sellingBook() {
+		String sql = "select * from tb_book order by hit desc";
+		return findBook(sql);
+	}
+
+	/*
+	 * 新书上架
+	 */
+	public List<Book> newBook() {
+		String sql = "select * from tb_book order by newBook desc";
+		return findBook(sql);
+	}
+
+	/*
+	 * 特价书
+	 */
+	public List<Book> saleBook() {
+		String sql = "select * from tb_book order by sale desc";
+		return findBook(sql);
+	}
+
+	/*
+	 * 修改图书信息
+	 */
+	public void updateBookInfo(int bookId, String bookName, String bookAuthor,
+			String bookPublisher, String bookType, float bookNowPrice,
+			String bookPicture, int sale, int newBook, String bookIntroduction,
+			int pnum) {
+		Connection con = JDBCUtils.getConnection();
+		Statement stm = null;
+		String sql = "update tb_book set bookName='" + bookName
+				+ "',bookAuthor='" + bookAuthor + "',bookPublisher='"
+				+ bookPublisher + "',bookType='" + bookType
+				+ "',bookNowPrice='" + bookNowPrice + "',bookPicture='"
+				+ bookPicture + "',sale='" + sale + "',newBook='" + newBook
+				+ "',bookIntroduction='" + bookIntroduction + "',pnum='" + pnum
+				+ "' where bookId='" + bookId + "'";
+		try {
+			stm = con.prepareStatement(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtils.close(null, null, stm, con);
+		}
+	}
+
+	/*
+	 * 删除书（可批量删）
+	 */
+	public void delete(Integer[] bookIds) {
+		Connection con = JDBCUtils.getConnection();
+		String sql = "delete from student where bookId=?";
+		PreparedStatement ps = null;
+		try {
+			ps = con.prepareStatement(sql);
+			for (int stuId : bookIds) {
+				// 對sql語句中的第一個參數賦值
+				ps.setInt(1, stuId);
+				ps.addBatch();
+			}
+			ps.executeBatch();
+		} catch (SQLException e) {
+			System.out.println("删除失败");
+		} finally {
+			JDBCUtils.close(null, ps, null, con);
+		}
+	}
+
+}

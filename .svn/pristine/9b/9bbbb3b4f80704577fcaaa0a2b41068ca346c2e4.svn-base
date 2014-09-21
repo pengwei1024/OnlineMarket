@@ -1,0 +1,52 @@
+@CHARSET "UTF-8";
+
+#content .logistics_info{
+	background:#FBFBFC;
+	border:1px solid #EAEAEA;
+	padding:15px;
+}
+#content .logistics_info>li{
+	margin:15px 0;
+}
+#content .logistics_info>li:first-child{
+	color:#1B730C;
+}
+
+#content .logistics_info>li>span{
+	margin-left:20px;
+}
+
+#content .logistics_tip{
+	border-bottom:1px solid #B2D1FF;
+	margin-bottom:10px;
+}
+#content .logistics_tip>span{
+	display:inline-block;
+	background:#F2F8FF;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	padding:5px 15px;
+}
+#content{
+	padding:20px 0;
+}
+
+#content>div:first-child{
+	width:20%;
+	background: #F0F7FF;
+	border:1px solid #BADCFF;
+	border-right:0;
+	box-shadow:-1px 1px 2px #ccc;
+	padding:10px 0;
+}
+#content>div:first-child>h4{
+	font-size:14px;
+	margin-left:10px;
+}
+
+#content .logistics_info_panel{
+	border:1px solid #BADCFE;
+	padding:20px;
+	width:70%;
+}
+

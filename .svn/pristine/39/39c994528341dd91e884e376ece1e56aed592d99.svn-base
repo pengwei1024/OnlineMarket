@@ -1,0 +1,49 @@
+package com.cxft.onlinemarket.model;
+
+public class OrderDetail {
+	private int odId;
+	private int orderId;
+	private int bookId;
+	private float bookPrice;
+	private int number;
+
+	public int getId() {
+		return odId;
+	}
+
+	public void setId(int id) {
+		this.odId = id;
+	}
+
+	public int getOrderId() {
+		return orderId;
+	}
+
+	public void setOrderId(int orderId) {
+		this.orderId = orderId;
+	}
+
+	public int getBookId() {
+		return bookId;
+	}
+
+	public void setBookId(int bookId) {
+		this.bookId = bookId;
+	}
+
+	public float getBookPrice() {
+		return bookPrice;
+	}
+
+	public void setBookPrice(float bookPrice) {
+		this.bookPrice = bookPrice;
+	}
+
+	public int getNumber() {
+		return number;
+	}
+
+	public void setNumber(int number) {
+		this.number = number;
+	}
+}

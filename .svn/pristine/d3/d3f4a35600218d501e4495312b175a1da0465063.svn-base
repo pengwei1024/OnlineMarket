@@ -1,0 +1,27 @@
+package com.cxft.onlinemarket.controller;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.cxft.onlinemarket.base.BaseServlet;
+import com.cxft.onlinemarket.dao.BookDao;
+
+@WebServlet("/querybookinfo")
+public class QueryBookInfoServlet extends BaseServlet {
+
+	@Override
+	protected void doRequest(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		BookDao bookDao = new BookDao();
+		req.setAttribute("querybook", bookDao.findAllBook());
+		req.getRequestDispatcher(
+				"/admin/includes/column/goodsManage/query_book_info.jsp")
+				.forward(req, resp);
+	}
+
+}

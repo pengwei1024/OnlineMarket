@@ -1,0 +1,45 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+<jsp:include page="header.jsp" flush="true" />
+
+<link rel="stylesheet" type="text/css" href="css/cart.css"/>
+
+<div id="content">
+	<div class="container">
+		<h2>我的购物车</h2>
+	<table>
+		<tr class="table_first">
+			<td>全选<input type="checkbox"/></td>
+			<td>商品</td>
+			<td>价格</td>
+			<td>库存</td>
+			<td>数量</td>
+			<td>操作</td>
+		</tr>
+		<% for(int i = 0; i<3;++i){ %>
+			<tr>
+			<td><input type="checkbox"/></td>
+			<td>
+				<img src="http://img10.360buyimg.com/n5/jfs/t151/263/981255933/80982/59b6ba6e/539fb694Nf254ad83.jpg"/>
+				<span>中兴 红牛 V5 3G手机（前黑后白） WCDMA/GSM 2G RAM</span>
+			</td>
+			<td>￥100</td>
+			<td>有货</td>
+			<td>1</td>
+			<td>删除</td>
+		</tr>
+		<% } %>
+	</table>
+	<div class="cart_count">总计（不含运费）：<span>¥999.90</span></div>
+	<div class="cart_submit_btn">
+		<button>继续购物</button>
+		<button></button>
+	</div>
+	</div>
+	
+</div>
+
+<jsp:include page="footer.jsp" flush="true" />

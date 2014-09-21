@@ -1,0 +1,40 @@
+package com.cxft.onlinemarket.model;
+
+public class OrderDetail {
+	private String order_id;
+	private int Book_id;
+	private int number;
+	private Book book;
+
+	public Book getBook() {
+		return book;
+	}
+
+	public void setBook(Book book) {
+		this.book = book;
+	}
+
+	public String getOrder_id() {
+		return order_id;
+	}
+
+	public void setOrder_id(String order_id) {
+		this.order_id = order_id;
+	}
+
+	public int getBook_id() {
+		return Book_id;
+	}
+
+	public void setBook_id(int book_id) {
+		Book_id = book_id;
+	}
+
+	public int getNumber() {
+		return number;
+	}
+
+	public void setNumber(int number) {
+		this.number = number;
+	}
+}

@@ -1,0 +1,29 @@
+@CHARSET "UTF-8";
+#content .book_nav{
+	width:200px;
+	border:1px solid #ccc;
+	box-shadow:1px 1px 6px #ccc;
+	position:relative;
+	top:20px;
+	background:#fff;
+	z-index:10;
+	
+}
+#content .book_nav>img{
+	display:none;
+}
+#content .book_nav,#content .book_nav>img,#content .book_nav dl,#content .book_nav dl dt{
+	border-radius:6px;
+}
+#content .book_nav dl dt{
+	background:#FAFAFA;
+	padding:5px 0 5px 10px;
+}
+#content .book_nav dl dd{
+	display:inline-block;
+	width:48%;
+	text-align:center;
+	padding:4px 0;
+}
+
+

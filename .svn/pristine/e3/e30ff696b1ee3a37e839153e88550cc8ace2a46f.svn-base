@@ -1,0 +1,271 @@
+.activity_panel{
+	margin:5px 0;
+}
+
+.activity_panel img{
+	width:100%;
+}
+
+.index_focus_ul img{
+	width:100%;
+	height: 300px;
+}
+
+.index_content_panel > div{
+	float:left;
+}
+
+.index_content_panel .index_container_left{
+	width:237px;
+}
+.index_content_panel .index_container_center{
+	width:651px;
+	margin:0 5px;
+}
+.index_content_panel .index_container_right{
+	width:225px;
+}
+
+
+
+#sidebar-menu {
+	/*目前要求宽度是238px,高度是332px，左边框+width正好238，以后需要可以修改*/
+	border-left: 1px solid #E4393C;
+	width: 237px;
+	/* height : 332px; */
+	margin: 0;
+	padding: 0;
+	background: #FFF7F0;
+}
+
+#sidebar-menu>ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+#sidebar-menu>ul>li {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	border-bottom: 1px solid #FDEADB;
+	position: relative;
+}
+
+#sidebar-menu>ul>li.selected {
+	background: #FFF;
+	border-top: 1px solid #E4393C;
+	border-bottom: 1px solid #E4393C;
+}
+
+#sidebar-menu>ul>li.first {
+	border-top: 1px solid #E4393C;
+}
+
+#sidebar-menu>ul>li.last {
+	border-bottom: 1px solid #E4393C;
+}
+
+#sidebar-menu .menu-item {
+	background: #FFF7F0 no-repeat left center;
+	height: 32px; /**控制菜单中每行的宽度，下面还有两处需要修改**/
+	border-right: 1px solid #E4393C;
+	z-index: 5;
+	position: relative;
+}
+
+#sidebar-menu>ul>li.selected .menu-item {
+	border-right: 1px solid #FFF;
+	background: #FFF no-repeat left center;
+}
+
+#sidebar-menu .menu-item span {
+	font-size: 13px;
+	font-weight: bold;
+	height: 32px;
+	line-height: 32px;
+	padding-left: 35px;
+	padding-top: 2px;
+	display: inline-block;
+}
+
+#sidebar-menu .menu-panel {
+	padding: 10px 20px;
+	display: none;
+	border: 1px solid #E4393C;
+	width: 560px;
+	position: absolute;
+	left: 236px;
+	top: -1px;
+	z-index: 5000;
+	min-height: 50px;
+	box-shadow: 1px 1px 4px #888888;
+	background:#fff;
+	border-left:0;
+}
+
+#sidebar-menu div.menu-panel.selected {
+	display: block;
+}
+
+/*Panel 里面的链接列表*/
+#sidebar-menu div.menu-panel ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+#sidebar-menu div.menu-panel ul li {
+	list-style: none;
+	padding: 5px 0px;
+	margin: 0;
+}
+
+#sidebar-menu div.menu-panel>ul>li>h2 {
+	margin: 0;
+	padding: 0;
+	padding-top: 2px;
+	font-size: 13px;
+	color: red;
+	float: left;
+	width: 60px;
+}
+
+#sidebar-menu div.menu-panel>ul>li>div.link-list {
+	float: left;
+	padding-left: 10px;
+	width: 450px;
+}
+
+#sidebar-menu div.menu-panel div.link-wrapper {
+	display: inline-block;
+	padding: 3px 0px;
+}
+
+#sidebar-menu div.menu-panel div.link-wrapper span {
+	font-size: 13px;
+	color: #888;
+	padding-right: 4px;
+}
+
+#sidebar-menu div.menu-panel div.link-list a {
+	font-size: 13px;
+	color: #888;
+	text-decoration: none;
+}
+
+#sidebar-menu div.menu-panel div.link-list a:hover {
+	text-decoration: underline;
+}
+
+#sidebar-menu div.clear {
+	clear: both;
+	height: 0;
+	line-height: 0;
+}
+
+.index_new_book{
+	padding:0 5px;
+	clear:both;
+	margin:5px 0;
+}
+.index_new_book > dt{
+	color:#48796E;
+	padding-bottom:2px;
+	border-bottom:2px solid #48796E;
+	margin-bottom:5px;
+	font-size:16px;
+}
+.index_new_book > dd{
+	display:block;
+	float:left;
+	width:150px;
+	margin:0 5px 10px;
+}
+.index_new_book dd>*{
+	display:block;
+	text-align:center;
+}
+.index_new_book dd .index_new_book_price{
+	color: #c30;
+	font-weight: bold;
+	margin:3px 0;
+}
+.index_new_book dd .index_new_book_title{
+	color:#000;
+	font-size:12px;
+	padding:0 5px;
+	margin:3px 0;
+}
+.index_new_book dd .index_new_book_author{
+	color: #aaa;
+	font-size:13px;
+}
+.index_new_book dd .index_new_book_title:hover{
+	text-decoration: underline;
+	color: #ec7814;
+}
+
+
+
+.index_goods_type_content > dt{
+	border-bottom:2px solid #AAAAAA;
+	padding-bottom:3px;
+}
+.index_goods_type_content > dt >span{
+	display:inline-block;
+	color:#fff;
+	width:27px;
+	font-weight:800;
+	height:35px;
+	line-height:30px;
+	text-align:center;
+	background:url("../images/20130330C.png") -40px 0 no-repeat;
+}
+.index_goods_type_content > dt >b{
+	color:#666666;
+	font-size:24px;
+	font-weight:800;
+	margin-left:10px;
+	position:relative;
+	top:5px;
+}
+.index_goods_type_content > dd{
+	display:inline-block;
+	margin:20px 35px;
+}
+
+.index_right_dl{
+	border: 1px solid #eaeaea;
+	padding: 6px 10px;
+	margin-bottom: 10px;	
+}
+.index_right_dl_list>dd{
+	margin:8px 0;
+}
+.index_right_dl_list>dd>span{
+	display:inline-block;
+	width:19px;
+	height:19px;
+	background:url("../images/20130417i.png") 0 -84px no-repeat;
+	text-align:center;
+	color:#fff;
+}
+
+.index_right_dl > dd >a{
+	font-size:12px;
+	list-style-type:square;
+	line-height:20px;
+}
+.index_right_dl > dd:fisrt-child{
+	margin-top:8px;
+}
+
+
+
+.index_left_activity_list{
+	margin:20px 0 0 0;
+}
+.index_left_activity_list>img{
+	margin-top:10px;
+}

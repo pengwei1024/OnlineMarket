@@ -1,0 +1,67 @@
+@CHARSET "UTF-8";
+.container{
+	width:1000px;
+	margin:0 auto;
+	padding-bottom:50px;
+}
+.container>h2{
+	border-bottom:2px solid #ccc;
+	padding-bottom:5px;
+}
+
+form{
+	display:block;
+	
+}
+
+.finish_btn{
+	
+}
+.order_info{
+	display:none;
+	margin-top:20px;
+}
+.order_info>dt{
+	background:#F7F7F7;
+	border:1px solid #DDDDDD;
+	padding:10px;
+	font-size:20px;
+}
+.order_info>dd{
+	display:block;
+	border:1px solid #DDDDDD;
+	border-top:0;
+	padding:10px;
+}
+.order_info>dd>b{
+	margin:10px;
+}
+.order_info>dd>div{
+	margin-left:10px;
+}
+table{
+	margin-top:15px;
+}
+
+.pay_btn{
+	text-align:right;
+}
+.pay_btn>font{
+	color: #e4393c;
+	font-size: 20px;
+	vertical-align: middle;
+	font-weight: normal;
+	margin-right:20px;
+}
+.pay_btn>button{
+	display:inline-block;
+	width:136px;
+	height:36px;
+	background:url("../images/btn-submit.jpg");
+	border:0;
+	position:relative;
+	top:10px;
+}
+.pay_btn>button:hover{
+	background-position:0 -36px;
+}

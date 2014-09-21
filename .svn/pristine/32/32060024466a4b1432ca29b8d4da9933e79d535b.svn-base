@@ -1,0 +1,43 @@
+.makeup1
+{
+	width:900px;height:60px;margin:10px auto;
+}
+.makeup2
+{
+	width:900px;height:60px;margin:10px auto;
+}
+.container{
+	width:600px;height:250px;margin:100px auto;border:5px solid #E8E8E8;background:#FFFFFF
+}
+.container_left
+{
+	width:350px;height:250px;;float:left;
+}
+.container_right
+{
+	width:250px;height:250px;margin-left:350px;
+	}
+.top
+{
+	width:250px;height:50px;text-align:center;
+}
+.middle1
+{
+	width:250px;height:50px;
+}
+.middle2
+{
+	width:250px;height:50px;
+}
+.middle3
+{
+	width:250px;height:50px;
+	}
+.Id
+{
+	width:200px;height:30px;margin:5px 20px;
+	}
+.Img
+{
+	width:350px;height:250px;
+	}

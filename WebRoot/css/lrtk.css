@@ -1,0 +1,61 @@
+/*本例css*/
+.index_focus {
+	width: 650px;
+	height: 300px;
+	margin: 0 auto;
+	position: relative;
+	overflow: hidden;
+	margin-bottom: 15px;
+}
+
+.index_focus ul li img{
+	width: 650px;
+}
+
+/*数字按钮样式*/
+.index_focus .num {
+	overflow: hidden;
+	height: 25px;
+	position: absolute;
+	bottom: 12px;
+	left: 15px;
+	zoom: 1;
+	z-index: 3
+}
+
+.index_focus .num li {
+	width: 25px;
+	height: 25px;
+	line-height: 25px;
+	text-align: center;
+	font-weight: 400;
+	font-family: "微软雅黑", Arial;
+	color: #FFFFFF;
+	background: #444444;
+	margin-right: 10px;
+	border-radius: 50%;
+	cursor: pointer;
+	float: left;
+}
+.index_focus .num li.on {
+	background: #FF7700;
+} /*当前项*/
+
+/*上一个  下一个*/
+.index_focus .prev,.index_focus .next {
+	display: none;
+	width: 40px;
+	height: 100px;
+	background: url(../images/btn.png) no-repeat;
+	position: absolute;
+	top: 115px;
+}
+
+.index_focus .prev {
+	left: 0;
+}
+
+.index_focus .next {
+	right: 0;
+	background-position: right
+}
